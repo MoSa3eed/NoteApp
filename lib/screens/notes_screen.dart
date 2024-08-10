@@ -59,6 +59,7 @@ class _NotesScreenState extends State<NotesScreen> {
                 builder: (context, state) {
                   List<NoteModel> notes =
                       BlocProvider.of<NotesCubit>(context).notes ?? [];
+                  // BlocProvider.of<NotesCubit>(context).notes ?? [];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: ListView.builder(

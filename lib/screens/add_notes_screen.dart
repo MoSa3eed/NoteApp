@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:note_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:note_app/models/note_model.dart';
-import 'package:note_app/screens/add_note_form.dart';
+import 'package:note_app/widgets/custom_text_field.dart';
 
 class AddNotesScreen extends StatefulWidget {
   const AddNotesScreen({
@@ -110,7 +111,62 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
               ],
             ),
           ),
-          body: const AddNoteForm(),
+          body: Form(
+            key: formKey,
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(top: 5, right: 5, left: 5, bottom: 5),
+              child: ListView(
+                children: [
+                  CustomTextField(
+                    validator: (value) {
+                      if (value?.isEmpty ?? true) {
+                        return 'Field is required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onSaved: (value) {
+                      title = value;
+                      print(title);
+                    },
+                    hint: 'Add Text note',
+                    maxLines: 19,
+                  ),
+                  BottomNavigationBar(
+                    elevation: .5,
+                    type: BottomNavigationBarType.fixed,
+                    backgroundColor: Colors.white,
+                    // selectedItemColor: const Color(0xff1356B8),
+                    items: const [
+                      BottomNavigationBarItem(
+                        icon: Icon(
+                          CupertinoIcons.delete,
+                        ),
+                        label: '',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(CupertinoIcons.rectangle_split_3x3),
+                        label: '',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(CupertinoIcons.textformat),
+                        label: '',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(CupertinoIcons.list_bullet),
+                        label: '',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(CupertinoIcons.list_bullet),
+                        label: '',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
       }),
     );
